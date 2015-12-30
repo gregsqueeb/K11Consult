@@ -11,7 +11,7 @@ The youtube video shows it running in Ubuntu - I've since switched to Debian as 
 
 To make it work in realtime (Debian):
 
-$ sudo apt-get install cutecom socat pygame python-serial
+$ sudo apt-get install cutecom socat python-pygame python-serial
 
 $ sudo gpasswd --add $USER dialout
 
@@ -21,9 +21,12 @@ $ socat -d -d pty,raw,echo=0 pty,raw,echo=0
 
 This will give you the two virtual serial port addresses. Set PORT in dashboard.py to one, and in cutecom the other. Also, in cutecom -> baud rate -> 9600.
 
+$ cutecom
+
+This will launch cutecom. In the device input write the other port. set the Baud rate to 9600 and click "Open device" button
+
 $ python dashboard.py
 
-In cutecom you should see FF FF EF - reply with 10 and the dashboard.py window should come to life. cutecom -> send file -> test_data.hex file.
+In cutecom you should see FF FF EF. Change "LF line end" to "Hex input" underneath the input box. Type in 10 and press enter and the dashboard.py window should come to life. cutecom -> send file -> test_data.hex file.
 
 Currently the data displayed is MPH, RPM (large centre arcs), AAC, MAF, temperature and battery voltage. The script is actually streaming 14 data values but these are the most useful to display. Pressing f will make it go fullscreen, w will make it revert back to windowed mode.
-
